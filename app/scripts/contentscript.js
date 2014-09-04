@@ -9,7 +9,7 @@ function getAnswer(url, elRep){
     var qHeader = $(data).find("#question-header");
     var question = qHeader.add($(data).find("#question"));
     var answer = $("<h1>ANSWER</h1>").add($(data).find(".accepted-answer"));
-    $(elRep).html(question.add(answer));
+    $(elRep).html(question.add(answer).add("<hr>=======================================================================================<hr>"));
   });
 }
 
@@ -17,12 +17,15 @@ function findResults(dom){
   var counter = 0;
   $(dom).find(".result-link").each(function(index){
     counter++;
+
     if (counter <=10){
       console.log($(this).find("a").attr("href"));
       var url, elRep;
       url = $(this).find("a").attr("href");
-      elRep = $(this).next();
+      elRep = $(this).parent().parent();
+      console.log(elRep);
       getAnswer(url, elRep);
+      // $(this).parent().css({"overflow": "scroll"});
     }
   });
 }
